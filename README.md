@@ -21,11 +21,12 @@ and see at a glance which tickets still have work left before release.
 
 ## Install
 
-Download or build the zip, then follow [INSTALL.md](INSTALL.md) (also included in the zip as `README.md`).
+**[Download the latest zip](https://github.com/ouzzm/stepper/releases/latest)** (the `stepper-<version>.zip` file under Assets),
+then follow [INSTALL.md](INSTALL.md) (also included in the zip as `README.md`).
 
 In short:
 
-1. Unzip into a folder you will keep.
+1. Download `stepper-<version>.zip` from the [latest release](https://github.com/ouzzm/stepper/releases/latest) and unzip it into a folder you will keep.
 2. Open `chrome://extensions` or `edge://extensions` and turn on **Developer mode**.
 3. Click **Load unpacked** and pick the unzipped folder.
 4. Click the Stepper toolbar button, enter your Azure DevOps address, click **Allow**, then reload Azure DevOps tabs.
@@ -49,7 +50,19 @@ npm run build      # builds the extension into dist/
 | `npm run package` | Builds and zips `dist/` with the install guide into `release/stepper-<version>.zip` |
 
 After a rebuild, click the reload button on the Stepper card in the extensions page and reload Azure DevOps tabs.
-Bump `version` in `src/manifest.json` and `package.json` before packaging a new release.
+
+### Releasing
+
+1. Bump `version` in `src/manifest.json` and `package.json` (same value) and commit.
+2. Tag and push:
+
+   ```bash
+   git tag v1.0.1
+   git push origin master v1.0.1
+   ```
+
+The [Release workflow](.github/workflows/release.yml) checks that the tag matches both versions, runs the
+type check and tests, builds the zip and publishes it as a GitHub release.
 
 ### Local preview
 

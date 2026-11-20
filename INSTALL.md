@@ -12,7 +12,8 @@ between picking up a ticket and releasing it.
 
 ## Install (Chrome or Edge)
 
-1. Unzip this file into a folder you will keep (the browser loads the extension from that folder).
+1. Download `stepper-<version>.zip` from https://github.com/ouzzm/stepper/releases/latest and unzip it into
+   a folder you will keep (the browser loads the extension from that folder).
 2. Open the extensions page:
    - Chrome: `chrome://extensions`
    - Edge: `edge://extensions`
@@ -30,7 +31,7 @@ between picking up a ticket and releasing it.
 
 ## Update to a new version
 
-1. Unzip the new version over the same folder.
+1. Download the new zip from https://github.com/ouzzm/stepper/releases/latest and unzip it over the same folder.
 2. On the extensions page, click the reload button on the Stepper card.
 3. Reload open Azure DevOps tabs.
 
