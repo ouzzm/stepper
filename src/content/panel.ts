@@ -10,6 +10,7 @@ import { OPEN_OPTIONS_MESSAGE } from '../core/messages.ts';
 import type { Answer, Progress, Template } from '../core/model.ts';
 import { boxIcon, closeIcon, gearIcon, statusIcons, undoIcon } from './icons.ts';
 import css from './panel.css';
+import { STATUS_ICON_ATTR } from './statusIcon.ts';
 import { store } from './store.ts';
 
 function el<K extends keyof HTMLElementTagNameMap>(
@@ -55,6 +56,19 @@ class Panel {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && this.ticketId) this.close();
     });
+    // Capture phase, so Azure handlers that stop propagation cannot keep the panel open.
+    // A status icon is left out: clicking one switches the panel to that ticket.
+    document.addEventListener(
+      'pointerdown',
+      (event) => {
+        if (!this.ticketId) return;
+        const inside = event
+          .composedPath()
+          .some((target) => target === this.host || (target instanceof Element && target.hasAttribute(STATUS_ICON_ATTR)));
+        if (!inside) this.close();
+      },
+      true,
+    );
   }
 
   open(ticketId: string): void {
@@ -67,7 +81,16 @@ class Panel {
 
   close(): void {
     this.ticketId = undefined;
-    this.host?.remove();
+    const host = this.host;
+    const aside = this.aside;
+    if (host && aside) {
+      // Slide out, then remove. The panel state is reset at once, so reopening during the
+      // animation builds a fresh panel. The timeout covers reduced motion and background tabs.
+      aside.classList.add('closing');
+      const remove = () => host.remove();
+      aside.addEventListener('animationend', remove, { once: true });
+      setTimeout(remove, 300);
+    }
     this.host = undefined;
     this.root = undefined;
     this.aside = undefined;

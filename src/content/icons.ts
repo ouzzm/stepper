@@ -29,8 +29,8 @@ export const closeIcon = svg(
 );
 
 export const gearIcon = svg(
-  '<circle cx="8" cy="8" r="2.2" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
-    '<path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>',
+  '<path d="M12.98 6.49L14.84 6.5L14.84 9.5L12.98 9.51L12.59 10.45L13.9 11.77L11.77 13.9L10.45 12.59L9.51 12.98L9.5 14.84L6.5 14.84L6.49 12.98L5.55 12.59L4.23 13.9L2.1 11.77L3.41 10.45L3.02 9.51L1.16 9.5L1.16 6.5L3.02 6.49L3.41 5.55L2.1 4.23L4.23 2.1L5.55 3.41L6.49 3.02L6.5 1.16L9.5 1.16L9.51 3.02L10.45 3.41L11.77 2.1L13.9 4.23L12.59 5.55z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>' +
+    '<circle cx="8" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.2"/>',
 );
 
 export const statusLabels: Record<TicketStatus, string> = {
