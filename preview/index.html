@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stepper preview</title>
+    <!--
+      Fake data, real Azure DevOps markup for the parts the adapters read:
+      bolt table id cells (query results) and the work item header link.
+      The column header markup is assumed; only the cells and the header link come from the real page.
+    -->
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font: 14px/1.45 "Segoe UI", system-ui, sans-serif; background: #f8f8f8; color: #201f1e; }
+      .topbar { height: 48px; background: #1b1a19; color: #fff; display: flex; align-items: center; padding: 0 16px; gap: 12px; }
+      .topbar a { color: #c8c6c4; text-decoration: none; }
+      .layout { display: flex; min-height: calc(100vh - 48px); }
+      nav { width: 48px; background: #eaeaea; flex: none; }
+      main { flex: 1; min-width: 0; padding: 16px 24px; }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      .note { color: #605e5c; margin: 0 0 16px; }
+      .note a { color: #0078d4; }
+      .card { background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.12); border-radius: 4px; overflow-x: auto; margin-bottom: 24px; }
+      table { border-collapse: collapse; width: 100%; min-width: 720px; }
+      th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #edebe9; white-space: nowrap; }
+      th { font-weight: 600; color: #605e5c; font-size: 12px; }
+      tbody tr:hover { background: #f3f2f1; cursor: pointer; }
+      .flex-row { display: flex; }
+      .flex-center { align-items: center; }
+      .flex-noshrink { flex-shrink: 0; }
+      .flex-grow { flex-grow: 1; }
+      .text-ellipsis { overflow: hidden; text-overflow: ellipsis; }
+      .secondary-text { color: #605e5c; }
+      .body-s { font-size: 12px; }
+      .padding-vertical-4 { padding-top: 4px; padding-bottom: 4px; }
+      .work-item-type-icon { display: inline-block; width: 10px; height: 14px; margin-right: 6px; background: currentColor; border-radius: 2px; }
+      .bolt-link { color: inherit; font-weight: 600; text-decoration: none; }
+      .wi { padding: 16px 20px; border-left: 6px solid rgb(236, 0, 140); }
+      .wi-title { font-size: 20px; font-weight: 600; margin: 4px 0 0; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar"><strong>Azure DevOps</strong><a href="#">Project</a><a href="#">Boards</a><a href="#">Queries</a></div>
+    <div class="layout">
+      <nav></nav>
+      <main>
+        <h1>My sprint tickets</h1>
+        <p class="note">
+          Local preview with fake data. Click the circle next to an id. Steps are edited on the
+          <a href="options.html" target="_blank">settings page</a>.
+        </p>
+
+        <div class="card">
+          <table role="grid">
+            <thead>
+              <tr>
+                <th role="columnheader" aria-colindex="1">ID</th>
+                <th role="columnheader" aria-colindex="2">Work Item Type</th>
+                <th role="columnheader" aria-colindex="3">Title</th>
+                <th role="columnheader" aria-colindex="4">Priority</th>
+                <th role="columnheader" aria-colindex="5">State</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+
+        <h1>Work item page</h1>
+        <p class="note">Work item header with the real markup.</p>
+        <div class="card wi">
+          <div class="flex-row flex-center secondary-text body-s padding-vertical-4 padding-right-4">
+            <div class="flex-row flex-noshrink">
+              <span aria-label="Escalation" class="fluent-icons-enabled" role="img" tabindex="0" style="color: rgb(236, 0, 140)"><span aria-hidden="true" class="work-item-type-icon icon-margin font-size-m normal bowtie-icon bowtie-symbol-flame flex-noshrink"></span></span>
+              <a class="bolt-link no-underline-link" href="/Project/_workitems/edit/48213" tabindex="0">ESCALATION 48213</a>
+            </div>
+            <div class="flex-grow"></div>
+          </div>
+          <p class="wi-title">Order total is wrong after discount</p>
+        </div>
+      </main>
+    </div>
+    <script>
+      const rows = [
+        ['48213', 'Escalation', 'Order total is wrong after discount', '1', 'Active'],
+        ['48190', 'Bug', 'Duplicate rows in invoice export', '2', 'Active'],
+        ['48177', 'Product Backlog Item', 'Add filter to customer list', '3', 'Committed'],
+        ['48102', 'Bug', 'Login page freezes on slow network', '2', 'Resolved'],
+      ];
+      document.getElementById('rows').innerHTML = rows
+        .map(
+          (cells) =>
+            '<tr>' +
+            cells
+              .map(
+                (value, i) =>
+                  `<td aria-colindex="${i + 1}" class="bolt-table-cell bolt-list-cell" data-column-index="${i}" role="gridcell">` +
+                  `<div class="bolt-table-cell-content flex-row flex-center"><span class="text-ellipsis">${value}</span></div></td>`,
+              )
+              .join('') +
+            '</tr>',
+        )
+        .join('');
+    </script>
+    <script src="preview.js"></script>
+  </body>
+</html>

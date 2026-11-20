@@ -1,0 +1,246 @@
+:root {
+  color-scheme: light;
+  --bg: #faf9f8;
+  --surface: #ffffff;
+  --text: #201f1e;
+  --muted: #605e5c;
+  --border: #d2d0ce;
+  --accent: #0078d4;
+  --accent-text: #ffffff;
+  --danger: #a4262c;
+  --success: #107c10;
+  --branch-yes: #107c10;
+  --branch-no: #a4262c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+}
+
+main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: 24px;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions {
+  margin-top: 16px;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled),
+.button:hover {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+button.icon {
+  padding: 4px 8px;
+  min-width: 30px;
+  justify-content: center;
+}
+
+button.danger:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.message {
+  color: var(--muted);
+}
+
+.message.error {
+  color: var(--danger);
+}
+
+.message.success {
+  color: var(--success);
+}
+
+.host-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.host-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+
+.host-list code {
+  overflow-wrap: anywhere;
+}
+
+/* Step tree */
+
+.step-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kind {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  width: 64px;
+}
+
+.step.question > .step-head .kind {
+  color: var(--accent);
+}
+
+.branches {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 0 24px;
+}
+
+.branch {
+  border-left: 3px solid var(--border);
+  padding-left: 10px;
+}
+
+.branch.yes {
+  border-left-color: var(--branch-yes);
+}
+
+.branch.no {
+  border-left-color: var(--branch-no);
+}
+
+.branch-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.add-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.add-row button {
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+.empty {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 4px;
+}
+
+input.invalid {
+  border-color: var(--danger);
+}
+
+@media (max-width: 560px) {
+  .kind {
+    display: none;
+  }
+
+  .branches {
+    margin-left: 8px;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Stepper",
+  "version": "1.0.0",
+  "description": "Tracks per-ticket release steps on Azure DevOps.",
+  "permissions": ["storage", "scripting"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": { "service_worker": "background.js" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "action": { "default_title": "Stepper settings" }
+}

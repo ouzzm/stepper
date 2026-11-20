@@ -1,0 +1,29 @@
+button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #8a8886;
+}
+
+button:hover {
+  background: rgba(0, 120, 212, 0.12);
+}
+
+button:focus-visible {
+  outline: 2px solid #0078d4;
+  outline-offset: 1px;
+}
+
+button.partial {
+  color: #0078d4;
+}
+
+button.complete {
+  color: #107c10;
+}
