@@ -1,6 +1,6 @@
 {
   "name": "stepper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Browser extension that tracks per-ticket release steps on Azure DevOps.",
   "type": "module",
