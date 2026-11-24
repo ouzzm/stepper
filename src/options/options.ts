@@ -242,6 +242,47 @@ discardButton.addEventListener('click', () => {
   showMessage(saveMessage, '');
 });
 
+/* ---------- Export and import ---------- */
+
+const exportButton = byId<HTMLButtonElement>('export');
+const importButton = byId<HTMLButtonElement>('import');
+const importFile = byId<HTMLInputElement>('import-file');
+
+// Exports what is saved, not the draft, so the file always holds a valid template.
+exportButton.addEventListener('click', () => {
+  if (!savedJson) return; // steps are still loading
+  const blob = new Blob([`${JSON.stringify(JSON.parse(savedJson), null, 2)}\n`], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = el('a', { href: url, download: 'stepper-steps.json' });
+  link.click();
+  URL.revokeObjectURL(url);
+  if (isDirty()) showMessage(saveMessage, 'Exported the saved steps; unsaved changes are not in the file.');
+});
+
+importButton.addEventListener('click', () => importFile.click());
+
+// An import replaces the draft only; nothing is stored until Save, so Discard undoes it.
+importFile.addEventListener('change', () => {
+  const file = importFile.files?.[0];
+  importFile.value = '';
+  if (!file) return;
+  file
+    .text()
+    .then((text) => {
+      let template: Template;
+      try {
+        template = parseTemplate(JSON.parse(text));
+      } catch (error) {
+        const reason = error instanceof SyntaxError ? 'it is not valid JSON' : errorText(error);
+        showMessage(saveMessage, `Could not import ${file.name}: ${reason}`, 'error');
+        return;
+      }
+      setDraft(template);
+      showMessage(saveMessage, `Imported ${file.name}. Review the steps, then Save.`);
+    })
+    .catch((error: unknown) => showMessage(saveMessage, `Could not read ${file.name}: ${errorText(error)}`, 'error'));
+});
+
 window.addEventListener('beforeunload', (event) => {
   if (isDirty()) event.preventDefault();
 });

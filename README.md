@@ -14,7 +14,7 @@ and see at a glance which tickets still have work left before release.
   mark it done; click the most recent done step to undo it. Steps are done in order.
 - **Conditional steps.** A step can be a yes/no question, such as "Is this a DB fix?". Only the steps under
   the chosen answer are added to that ticket. Questions can be nested.
-- **Your own checklist.** Steps and questions are defined once on the settings page and apply to every ticket.
+- **Your own checklist.** Steps and questions are defined once on the settings page and apply to every ticket. Export and import them as a JSON file.
 - **Local only.** Everything lives in the browser's extension storage, keyed by ticket id.
   No server, no Azure DevOps token, nothing leaves the browser.
 - **Works with self-hosted Azure DevOps.** The extension runs only on the address you allow in settings.
@@ -80,7 +80,7 @@ page's localStorage. The preview is never part of the extension build.
 - **Step engine** (`src/core/engine.ts`): pure functions that flatten the step tree by the chosen answers and
   compute each step's state. Progress is an ordered stack of done step ids plus the answers to questions.
 - **Background** (`src/background.ts`): registers the content script only on the hosts allowed in settings.
-- **Settings** (`src/options`): allowed hosts and the step editor.
+- **Settings** (`src/options`): allowed hosts, the step editor, and step export and import.
 
 ## Project structure
 

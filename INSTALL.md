@@ -41,4 +41,6 @@ Your steps and ticket progress are kept.
 
 Steps and ticket progress are stored only in this browser's extension storage. Nothing is sent anywhere.
 Clearing the browser cache keeps the data; removing the extension deletes it.
+To keep your steps or share them with a teammate, use **Export** on the settings page; **Import** loads such a file
+into the editor, and nothing changes until you click **Save**. Ticket progress is not part of the file.
 Chrome and Edge keep separate data.

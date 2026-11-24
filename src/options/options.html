@@ -31,6 +31,10 @@
           <button id="save" type="button" class="primary" disabled>Save</button>
           <button id="discard" type="button" disabled>Discard changes</button>
           <span id="save-message" class="message" role="status"></span>
+          <span class="spacer"></span>
+          <button id="export" type="button" title="Download the saved steps as a JSON file">Export</button>
+          <button id="import" type="button" title="Load steps from a JSON file, then review and save">Import</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden />
         </div>
       </section>
     </main>

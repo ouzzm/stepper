@@ -85,7 +85,7 @@ class Panel {
     const aside = this.aside;
     if (host && aside) {
       // Slide out, then remove. The panel state is reset at once, so reopening during the
-      // animation builds a fresh panel. The timeout covers reduced motion and background tabs.
+      // animation builds a fresh panel. The timeout covers tabs where animationend never fires.
       aside.classList.add('closing');
       const remove = () => host.remove();
       aside.addEventListener('animationend', remove, { once: true });
